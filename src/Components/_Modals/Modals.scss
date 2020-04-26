@@ -1,0 +1,61 @@
+.modal-body {
+  font-family: "Manrope", sans-serif;
+  padding: 30px 40px;
+
+  h4 {
+    font-weight: 700;
+  }
+
+  label {
+    font-size: 14px;
+    margin: 0 0 5px;
+  }
+
+  input {
+    width: 100%;
+    padding: 5px 10px;
+    border: 2px solid #ebf0f6;
+    border-radius: 5px;
+    outline: none;
+    transition: 0.3s ease-in-out all;
+
+    &:focus {
+      transition: 0.3s ease-in-out all;
+      border: 2px solid #cde3fd;
+    }
+  }
+
+  .buttons {
+    margin: 20px 0 0;
+    text-align: center;
+
+    button {
+      width: 40%;
+      margin: 0 10px;
+      background-color: #ebf0f6;
+      border: none;
+      padding: 10px 0;
+      font-weight: 700;
+      border-radius: 5px;
+      transition: 0.3s ease-in-out all;
+      outline: none;
+
+      &:hover {
+        background-color: #cde3fd;
+        transition: 0.3s ease-in-out all;
+      }
+
+      &:first-child {
+        opacity: 0.7;
+        transition: 0.3s ease-in-out all;
+
+        &:hover {
+          opacity: 1;
+          transition: 0.3s ease-in-out all;
+        }
+      }
+    }
+
+  }
+
+}

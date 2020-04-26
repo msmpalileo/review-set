@@ -1,7 +1,19 @@
 html,
 body {
-  font-family: "Manrope", sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #ebf0f6;
+}
+
+body {
+  background-color: #ebf0f6 !important;
+}
+
+.appContainer {
+  font-family: "Manrope", sans-serif;
+  padding: 50px 0;
+}
+
+//Helpers 
+.nopadding {
+  padding: 0 !important;
 }

@@ -1,0 +1,33 @@
+.reviewSetContainer {
+  margin: 20px 0 0;
+  background-color: #fff;
+  border-radius: 5px;
+  height: 80vh;
+
+  .reviewItem {
+    padding: 10px 20px;
+    border: 2px solid #EBF0F6;
+    margin: 20px 10px;
+    border-radius: 5px;
+    transition: 0.3s ease-in-out all;
+
+    span {
+      font-size: 14px;
+      color: rgb(167, 167, 167);
+    }
+
+    b {
+      cursor: pointer;
+    }
+
+    img {
+      width: 15px;
+    }
+
+    &:hover {
+      border: 2px solid #cde3fd;
+      transition: 0.3s ease-in-out all;
+    }
+
+  }
+}
