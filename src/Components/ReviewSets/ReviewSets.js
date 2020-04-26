@@ -4,6 +4,9 @@ import history from "../../Resources/Icons/history.png";
 import trash from "../../Resources/Icons/delete.png";
 import { sortSets, getStringDate } from "../utils";
 
+import "react-perfect-scrollbar/dist/css/styles.css";
+import PerfectScrollbar from "react-perfect-scrollbar";
+
 const ReviewSets = ({ records }) => {
   const mapDocuments = (arr) => {};
 
@@ -38,8 +41,8 @@ const ReviewSets = ({ records }) => {
 
   return (
     <div className="row">
-      <div className="col-md-12 reviewSetContainer">
-        {mapReviewSets(records)}
+      <div className="col-md-12 reviewSetContainer nopadding">
+        <PerfectScrollbar>{mapReviewSets(records)}</PerfectScrollbar>
       </div>
     </div>
   );

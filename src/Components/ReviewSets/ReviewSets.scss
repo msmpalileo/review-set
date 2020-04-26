@@ -2,13 +2,13 @@
   margin: 20px 0 0;
   background-color: #fff;
   border-radius: 5px;
-  overflow-y: scroll;
   min-height: 80vh;
+  max-height: 80vh;
 
   .reviewItem {
     padding: 10px 20px;
-    border: 2px solid #EBF0F6;
-    margin: 20px 10px;
+    border: 2px solid #ebf0f6;
+    margin: 20px 25px;
     border-radius: 5px;
     transition: 0.3s ease-in-out all;
 
@@ -38,10 +38,9 @@
 
         .addDocument {
           border: 2px dashed #cde3fd;
-          height: 300px;
+          height: 310px;
         }
       }
     }
-
   }
 }
