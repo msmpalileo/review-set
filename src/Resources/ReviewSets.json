@@ -1,13 +1,13 @@
 [
   {
     "id": 1,
-    "date": "2020-04-27",
+    "date": "2020-04-13",
     "title": "House Leasing Contracts for Will Smith",
     "documents": []
   },
   {
     "id": 2,
-    "date": "2020-05-02",
+    "date": "2020-04-02",
     "title": "School Documents",
     "documents": [
       {
@@ -15,7 +15,14 @@
         "description": "Official Memo from the Principal to suspend all classes starting March 27, 2020 until further notice.",
         "doc": [],
         "reviewed": false
+      },
+      {
+        "title": "New Projects regarding the New Building",
+        "description": "Documents from Contractors.",
+        "doc": [],
+        "reviewed": false
       }
     ]
   }
 ]
+  

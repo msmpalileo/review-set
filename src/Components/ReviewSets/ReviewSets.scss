@@ -2,7 +2,8 @@
   margin: 20px 0 0;
   background-color: #fff;
   border-radius: 5px;
-  height: 80vh;
+  overflow-y: scroll;
+  min-height: 80vh;
 
   .reviewItem {
     padding: 10px 20px;
@@ -27,6 +28,19 @@
     &:hover {
       border: 2px solid #cde3fd;
       transition: 0.3s ease-in-out all;
+    }
+
+    .documentsContainer {
+      margin: 20px 0 10px;
+
+      .documentWrapper {
+        padding: 0 15px 0 0;
+
+        .addDocument {
+          border: 2px dashed #cde3fd;
+          height: 300px;
+        }
+      }
     }
 
   }

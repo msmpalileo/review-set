@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { Modal } from "react-bootstrap";
 import "./Modals.scss";
 
-import { generateID, getDateToday } from "../utils";
+import { generateID } from "../utils";
 
-const CreateReviewSet = (props) => {
+const CreateReviewSet = ({ setRecords, records, onHide, show }) => {
   const [title, setTitle] = useState("");
 
   const createSet = (title) => {
-    props.setrecords([
-      ...props.records,
+    setRecords([
+      ...records,
       {
         id: generateID(),
         title: title,
@@ -18,12 +18,13 @@ const CreateReviewSet = (props) => {
       },
     ]);
     setTitle("");
-    props.onHide();
+    onHide();
   };
 
   return (
     <Modal
-      {...props}
+      show={show}
+      onHide={onHide}
       size="md"
       aria-labelledby="contained-modal-title-vcenter"
       centered
@@ -38,7 +39,7 @@ const CreateReviewSet = (props) => {
           id="inputTitle"
         />
         <div className="buttons">
-          <button onClick={props.onHide}>Cancel</button>
+          <button onClick={onHide}>Cancel</button>
           <button onClick={() => createSet(title)}>Create Set</button>
         </div>
       </Modal.Body>

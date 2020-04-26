@@ -2,7 +2,8 @@ export const generateID = () => {
   return "_" + Math.random().toString(36).substr(2, 9);
 };
 
-export const getMonth = (date) => {
+export const getStringDate = (receivedDate) => {
+  const date = new Date(receivedDate);
   let month = "";
 
   switch (date.getMonth()) {
@@ -46,10 +47,13 @@ export const getMonth = (date) => {
       break;
   }
 
-  return month;
+  return `${month} ${date.getDate()}, ${date.getFullYear()}`;
 };
 
 export const sortSets = (array) => {
-  //eslint-disable-next-line
-  return array.sort((a,b) => b.date - a.date);
-}
+  return array.sort((a, b) => {
+    const x = new Date(a.date);
+    const y = new Date(b.date);
+    return y - x;
+  });
+};

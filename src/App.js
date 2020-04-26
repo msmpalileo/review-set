@@ -10,7 +10,7 @@ const App = () => {
 
   return (
     <div className="container appContainer">
-      <TitleBar setrecords={() => setRecords()} records={records} />
+      <TitleBar setRecords={setRecords} records={records} />
       <ReviewSets records={records} />
     </div>
   );
