@@ -8,9 +8,13 @@ const TitleBar = (props) => {
   const [showCreate, setShowCreate] = useState(false);
 
   return (
-    <div className="row">
-      <div className="col-md-12 titleBar">
-        <CreateSet show={showCreate} onHide={() => setShowCreate(false)} {...props} />
+    <div className="row justify-content-center">
+      <div className="col-md-10 titleBar">
+        <CreateSet
+          show={showCreate}
+          onHide={() => setShowCreate(false)}
+          {...props}
+        />
         <h3>
           <img src={doc} alt="Document" />
           &nbsp; Review Sets

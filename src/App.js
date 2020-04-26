@@ -9,7 +9,7 @@ const App = () => {
   const [records, setRecords] = useState([...Records]);
 
   return (
-    <div className="container appContainer">
+    <div className="container-fluid appContainer">
       <TitleBar setRecords={setRecords} records={records} />
       <ReviewSets records={records} />
     </div>
