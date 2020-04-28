@@ -57,3 +57,18 @@ export const sortSets = (array) => {
     return y - x;
   });
 };
+
+export const expandSet = (id) => {
+  const item = document.getElementById("item-" + id);
+  const plusSymbol = document.getElementById("expand1-" + id);
+
+  if (item.classList.contains("expanded")) {
+    item.classList.remove("expanded");
+    item.style.height = "48px";
+    plusSymbol.style.transform = "rotate(0)";
+  } else {
+    item.classList.add("expanded");
+    item.style.height = `${item.scrollHeight + 5}px`;
+    plusSymbol.style.transform = "rotate(90deg)";
+  }
+};

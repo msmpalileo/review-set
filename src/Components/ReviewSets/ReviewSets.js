@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import "./ReviewSets.scss";
 import history from "../../Resources/Icons/history.png";
 import trash from "../../Resources/Icons/delete.png";
 import add from "../../Resources/Icons/add.png";
-import { sortSets, getStringDate } from "../utils";
+import { sortSets, getStringDate, expandSet } from "../utils";
+import AddDocument from "../_Modals/AddDocument";
 
 import "react-perfect-scrollbar/dist/css/styles.css";
 import PerfectScrollbar from "react-perfect-scrollbar";
@@ -36,10 +37,17 @@ const ReviewSets = ({ records }) => {
   const mapReviewSets = (arr) => {
     const sortedSets = sortSets(arr);
     return sortedSets.map((set) => {
+      const [showAdd, setshowAdd] = useState(false);
+      const [documents, setDocuments] = useState([...set.documents]);
+
       return (
-        <div className="row reviewItem" key={set.id}>
+        <div className="row reviewItem" id={`item-${set.id}`} key={set.id}>
           <div className="col-md-2 nopadding">
-            <span className="date">{getStringDate(set.date)}</span>
+            <button onClick={() => expandSet(set.id)}>
+              <div id={`expand1-${set.id}`}></div>
+              <div id="expand2">&nbsp;</div>
+            </button>
+            <span>&emsp;{getStringDate(set.date)}</span>
           </div>
           <div className="col-md-7 nopadding">
             <b>{set.title}</b>
@@ -51,16 +59,22 @@ const ReviewSets = ({ records }) => {
           </div>
           <div className="col-12 nopadding">
             <div className="row documentsContainer">
-              {mapDocuments(set.documents)}
+              {mapDocuments(documents)}
               <div className="col-3 documentWrapper">
-                <div className="addDocument">
+                <button className="addDocument"  onClick={() => setshowAdd(true)}>
                   <div className="placeholder">
                     <img src={add} alt="Add" />
                     <h5>Add a Document</h5>
                   </div>
-                </div>
+                </button>
               </div>
             </div>
+            <AddDocument
+              show={showAdd}
+              onHide={() => setshowAdd(false)}
+              documents={documents}
+              setDocuments={setDocuments}
+            />
           </div>
         </div>
       );

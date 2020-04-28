@@ -3,17 +3,19 @@
   padding: 30px 40px;
 
   h4 {
-    font-weight: 700;
+    font-weight: 800;
   }
 
   label {
-    font-size: 14px;
+    font-size: 13px;
     margin: 0 0 5px;
   }
 
-  input {
+  input,
+  textarea {
     width: 100%;
     padding: 5px 10px;
+    margin: 0 0 10px;
     border: 2px solid #ebf0f6;
     border-radius: 5px;
     outline: none;
@@ -25,8 +27,12 @@
     }
   }
 
+  textarea {
+    resize: none;
+  }
+
   .buttons {
-    margin: 20px 0 0;
+    margin: 10px 0 0;
     text-align: center;
 
     button {
