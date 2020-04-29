@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./ReviewSets.scss";
 import history from "../../Resources/Icons/history.png";
 import trash from "../../Resources/Icons/delete.png";
+import draft from "../../Resources/Icons/drafts.png";
 
 import add from "../../Resources/Icons/add.png";
 import { sortSets, getStringDate, expandSet, percentReviewed } from "../utils";
@@ -163,7 +164,18 @@ const ReviewSets = ({ records, setRecords }) => {
   return (
     <div className="row justify-content-center">
       <div className="col-md-10 reviewSetContainer nopadding">
-        <PerfectScrollbar>{mapReviewSets(records)}</PerfectScrollbar>
+        <PerfectScrollbar>
+          {records.length ? (
+            mapReviewSets(records)
+          ) : (
+            <div className="emptySet">
+              <img src={draft} alt="Draft" />
+              <h3>Create a Review Set</h3>
+              <p>Review Sets are displayed here.</p>
+            </div>
+          )}
+        </PerfectScrollbar>
+
         <AddDocument
           show={showAdd}
           onHide={() => setshowAdd(false)}
