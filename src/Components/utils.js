@@ -78,14 +78,12 @@ export const expandSet = (id, length) => {
 
 export const adjustHeight = (id, length) => {
   const item = document.getElementById("item-" + id);
-  const plusSymbol = document.getElementById("expand1-" + id);
 
-  const expandMultiplier = Math.floor((length + 1) / 4);
+  const expandMultiplier = Math.floor(length / 4);
   const expandHeight = 600 * (expandMultiplier + 1);
 
   item.classList.add("expanded");
   item.style.height = `${expandHeight + 30}px`;
-  plusSymbol.style.transform = "rotate(90deg)";
 };
 
 export const handleUpload = (e, setDocument, setDocumentName) => {
@@ -97,6 +95,7 @@ export const handleUpload = (e, setDocument, setDocumentName) => {
     // eslint-disable-next-line
     let url = reader.readAsDataURL(file);
 
+    // eslint-disable-next-line
     reader.onloadend = (e) => {
       setDocument([reader.result]);
       setDocumentName(file.name);

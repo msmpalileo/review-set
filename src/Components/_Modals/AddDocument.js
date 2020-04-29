@@ -1,33 +1,58 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Modal } from "react-bootstrap";
 import "./Modals.scss";
 
 import doc from "../../Resources/Icons/drafts.png";
 
-import { generateID, handleUpload } from "../utils";
+import { generateID, handleUpload, adjustHeight } from "../utils";
 
-const AddDocument = ({ setUpdates, documents, onHide, show }) => {
+const AddDocument = ({ setUpdates, documents, onHide, show, id }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [documentFile, setDocumentFile] = useState([]);
   const [documentName, setDocumentName] = useState("");
+  const isInitialMount = useRef(true);
+
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+    } else {
+      const el = document.getElementById("inputTitle");
+      el.style.borderColor = "#ebf0f6";
+      const el2 = document.getElementById("documentPlaceholder");
+      el2.style.borderColor = "#ebf0f6";
+    }
+  }, [title, documentFile]);
 
   const addDocument = () => {
-    setUpdates([
-      ...documents,
-      {
-        id: generateID(),
-        title: title,
-        description: description,
-        doc: documentFile,
-        reviewed: false,
-      },
-    ]);
-    setTitle("");
-    setDescription("");
-    setDocumentFile([]);
-    setDocumentName("");
-    onHide();
+    if (title && documentFile.length !== 0) {
+      let arr = [
+        ...documents,
+        {
+          id: generateID(),
+          title: title,
+          description: description,
+          doc: documentFile,
+          reviewed: false,
+        },
+      ];
+
+      setUpdates(arr);
+      setTitle("");
+      setDescription("");
+      setDocumentFile([]);
+      setDocumentName("");
+      adjustHeight(id, arr.length);
+      onHide();
+    } else if (!title) {
+      const el = document.getElementById("inputTitle");
+      el.style.borderColor = "red";
+      alert("Title");
+    } else if (documentFile.length === 0) {
+      const el2 = document.getElementById("documentPlaceholder");
+      el2.style.borderColor = "red";
+      alert("Document");
+    }
   };
 
   return (
@@ -55,7 +80,7 @@ const AddDocument = ({ setUpdates, documents, onHide, show }) => {
           id="inputDescription"
         />
         <button
-          className="documentPlaceholder"
+          id="documentPlaceholder"
           onClick={() => document.getElementById("uploadDocument").click()}
         >
           {documentFile.length ? (

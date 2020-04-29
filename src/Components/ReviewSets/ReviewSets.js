@@ -4,13 +4,7 @@ import history from "../../Resources/Icons/history.png";
 import trash from "../../Resources/Icons/delete.png";
 
 import add from "../../Resources/Icons/add.png";
-import {
-  sortSets,
-  getStringDate,
-  expandSet,
-  adjustHeight,
-  percentReviewed,
-} from "../utils";
+import { sortSets, getStringDate, expandSet, percentReviewed } from "../utils";
 import DeleteItem from "../_Modals/DeleteItem";
 import AddDocument from "../_Modals/AddDocument";
 import Documents from "./Documents";
@@ -24,6 +18,7 @@ const ReviewSets = ({ records, setRecords }) => {
   const [updatedDocuments, setUpdates] = useState();
   const [reviewID, setID] = useState();
   const [deleteParams, setDeleteParams] = useState({});
+  const [expandID, setExpand] = useState({});
 
   useEffect(() => {
     if (updatedDocuments) {
@@ -43,7 +38,10 @@ const ReviewSets = ({ records, setRecords }) => {
       return (
         <div className="row reviewItem" id={`item-${set.id}`} key={set.id}>
           <div className="col-md-2 nopadding">
-            <button className="expandButton" onClick={() => expandSet(set.id, set.documents.length)}>
+            <button
+              className="expandButton"
+              onClick={() => expandSet(set.id, set.documents.length)}
+            >
               <div id={`expand1-${set.id}`}></div>
               <div id="expand2">&nbsp;</div>
             </button>
@@ -65,31 +63,31 @@ const ReviewSets = ({ records, setRecords }) => {
               <img src={trash} alt="Delete" />
             </button>
           </div>
-          <div className="col-12 nopadding">
-            <div className="row documentsContainer">
-              <Documents
-                documents={set.documents}
-                setUpdates={setUpdates}
-                id={set.id}
-                setID={setID}
-              />
-              <div className="col-3 documentWrapper">
-                <button
-                  className="addDocument"
-                  onClick={() => {
-                    setshowAdd(true);
-                    setUpdates(set.documents);
-                    setID(set.id);
-                  }}
-                >
-                  <div className="placeholder">
-                    <img src={add} alt="Add" />
-                    <h5>Add a Document</h5>
-                  </div>
-                </button>
+            <div className="col-12 nopadding documentContainer">
+              <div className="row documentWrapper">
+                <Documents
+                  documents={set.documents}
+                  setUpdates={setUpdates}
+                  id={set.id}
+                  setID={setID}
+                />
+                <div className="col-3 documentItem">
+                  <button
+                    className="addDocument"
+                    onClick={() => {
+                      setshowAdd(true);
+                      setUpdates(set.documents);
+                      setID(set.id);
+                    }}
+                  >
+                    <div className="placeholder">
+                      <img src={add} alt="Add" />
+                      <h5>Add a Document</h5>
+                    </div>
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
         </div>
       );
     });
@@ -104,6 +102,7 @@ const ReviewSets = ({ records, setRecords }) => {
           onHide={() => setshowAdd(false)}
           documents={updatedDocuments}
           setUpdates={setUpdates}
+          id={reviewID}
         />
         <DeleteItem
           show={showDelete}

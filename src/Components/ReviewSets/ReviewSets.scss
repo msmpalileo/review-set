@@ -12,6 +12,7 @@
     border-radius: 5px;
     transition: 0.3s ease-in-out all;
     height: 48px;
+    max-height: 600;
     overflow: hidden;
 
     span {
@@ -72,6 +73,7 @@
   }
 
   .expanded {
+    height: 600px;
     border: 2px solid #cde3fd;
     transition: 0.3s ease-in-out all;
   }

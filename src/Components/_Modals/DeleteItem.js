@@ -2,6 +2,8 @@ import React from "react";
 import { Modal } from "react-bootstrap";
 import "./Modals.scss";
 
+import { adjustHeight } from "../utils";
+
 const DeleteItem = ({
   setRecords,
   records,
@@ -22,8 +24,9 @@ const DeleteItem = ({
       setRecords(arr);
     } else {
       let arr = [...documents];
-      arr.splice(deleteParams, 1);
+      arr.splice(deleteParams.index, 1);
 
+      adjustHeight(id, arr.length);
       onHide();
       setID(id);
       setUpdates(arr);

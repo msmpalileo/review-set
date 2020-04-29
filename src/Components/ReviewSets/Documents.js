@@ -35,8 +35,8 @@ const mapDocuments = ({ documents, setUpdates, id, setID }) => {
       />
       {documents.map((doc, index) => {
         return (
-          <div className="col-3 documentWrapper" key={doc.id}>
-            <div className="documentItem">
+          <div className="col-3 documentItem" key={doc.id}>
+            <div className="regularDocument">
               <div className="row">
                 <div className="col-md-9">
                   <b>{doc.title}</b>
