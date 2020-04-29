@@ -72,3 +72,24 @@ export const expandSet = (id) => {
     plusSymbol.style.transform = "rotate(90deg)";
   }
 };
+
+export const adjustHeight = (id) => {
+  const item = document.getElementById("item-" + id);
+  item.style.height = `${item.scrollHeight + 5}px`;
+};
+
+export const handleUpload = (e, setDocument, setDocumentName) => {
+  setDocument([]);
+  setDocumentName("");
+  const files = e.target.files;
+  Array.from(files).forEach((file) => {
+    let reader = new FileReader();
+    // eslint-disable-next-line
+    let url = reader.readAsDataURL(file);
+
+    reader.onloadend = (e) => {
+      setDocument([reader.result]);
+      setDocumentName(file.name);
+    };
+  });
+};
