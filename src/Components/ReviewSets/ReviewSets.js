@@ -22,10 +22,13 @@ const ReviewSets = ({ records, setRecords }) => {
 
   const debounce = (fn, ms) => {
     let timer;
+    // eslint-disable-next-line
     return (_) => {
       clearTimeout(timer);
+      // eslint-disable-next-line
       timer = setTimeout((_) => {
         timer = null;
+        // eslint-disable-next-line
         fn.apply(this, arguments);
       }, ms);
     };
@@ -38,6 +41,7 @@ const ReviewSets = ({ records, setRecords }) => {
 
     window.addEventListener("resize", debouncedHandleResize);
 
+    // eslint-disable-next-line
     return (_) => {
       window.removeEventListener("resize", debouncedHandleResize);
     };
@@ -73,7 +77,9 @@ const ReviewSets = ({ records, setRecords }) => {
                 <span>&emsp;{getStringDate(set.date)}</span>
               </div>
               <div className="col-md-8 col-lg-7 nopadding">
-                <b><p>{set.title}</p></b>
+                <b>
+                  <p>{set.title}</p>
+                </b>
               </div>
               <div className="col-md-4 col-lg-3 nopadding text-right">
                 <img src={history} alt="History" />
@@ -118,7 +124,9 @@ const ReviewSets = ({ records, setRecords }) => {
                 </button>
               </div>
               <div className="col-12 nopadding">
-                <b><p>{set.title}</p></b>
+                <b>
+                  <p>{set.title}</p>
+                </b>
               </div>
             </>
           )}

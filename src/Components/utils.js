@@ -90,7 +90,7 @@ export const expandSet = (id, length) => {
   }
 };
 
-export const adjustHeight = (id, length) => {
+export const adjustHeight = (id) => {
   const item = document.getElementById("item-" + id);
 
   // const expandMultiplier = Math.floor(length / 4);
