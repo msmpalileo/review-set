@@ -62,28 +62,42 @@ export const expandSet = (id, length) => {
   const item = document.getElementById("item-" + id);
   const plusSymbol = document.getElementById("expand1-" + id);
 
+  const currentHeight = item.offsetHeight;
   const expandMultiplier = Math.floor((length + 1) / 4);
   const expandHeight = 600 * (expandMultiplier + 1);
 
   if (item.classList.contains("expanded")) {
+    item.style.height = `${currentHeight}px`;
     item.classList.remove("expanded");
-    item.style.height = "48px";
-    plusSymbol.style.transform = "rotate(0)";
+    setTimeout(() => {
+      if (window.innerWidth < 992) {
+        item.style.height = "75px";
+      } else {
+        item.style.height = "48px";
+      }
+      plusSymbol.style.transform = "rotate(0)";
+    }, 100);
   } else {
     item.classList.add("expanded");
     item.style.height = `${expandHeight + 30}px`;
     plusSymbol.style.transform = "rotate(90deg)";
+
+    setTimeout(() => {
+      item.style.height = "fit-content";
+    }, 400);
   }
 };
 
 export const adjustHeight = (id, length) => {
   const item = document.getElementById("item-" + id);
 
-  const expandMultiplier = Math.floor(length / 4);
-  const expandHeight = 600 * (expandMultiplier + 1);
+  // const expandMultiplier = Math.floor(length / 4);
+  // const expandHeight = 600 * (expandMultiplier + 1);
 
-  item.classList.add("expanded");
-  item.style.height = `${expandHeight + 30}px`;
+  // item.classList.add("expanded");
+  // item.style.height = `${expandHeight + 30}px`;
+
+  item.style.height = "fit-content";
 };
 
 export const handleUpload = (e, setDocument, setDocumentName) => {

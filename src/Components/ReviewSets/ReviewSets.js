@@ -18,7 +18,6 @@ const ReviewSets = ({ records, setRecords }) => {
   const [updatedDocuments, setUpdates] = useState();
   const [reviewID, setID] = useState();
   const [deleteParams, setDeleteParams] = useState({});
-  const [expandID, setExpand] = useState({});
 
   useEffect(() => {
     if (updatedDocuments) {
@@ -37,7 +36,7 @@ const ReviewSets = ({ records, setRecords }) => {
     return sortedSets.map((set, index) => {
       return (
         <div className="row reviewItem" id={`item-${set.id}`} key={set.id}>
-          <div className="col-md-2 nopadding">
+          <div className="col-md-12 col-lg-2 nopadding">
             <button
               className="expandButton"
               onClick={() => expandSet(set.id, set.documents.length)}
@@ -47,10 +46,10 @@ const ReviewSets = ({ records, setRecords }) => {
             </button>
             <span>&emsp;{getStringDate(set.date)}</span>
           </div>
-          <div className="col-md-7 nopadding">
+          <div className="col-md-8 col-lg-7 nopadding">
             <b>{set.title}</b>
           </div>
-          <div className="col-md-3 nopadding text-right">
+          <div className="col-md-4 col-lg-3 nopadding text-right">
             <img src={history} alt="History" />
             <span>&ensp;{percentReviewed(set.documents)}% Reviewed</span>&emsp;
             <button
@@ -63,31 +62,31 @@ const ReviewSets = ({ records, setRecords }) => {
               <img src={trash} alt="Delete" />
             </button>
           </div>
-            <div className="col-12 nopadding documentContainer">
-              <div className="row documentWrapper">
-                <Documents
-                  documents={set.documents}
-                  setUpdates={setUpdates}
-                  id={set.id}
-                  setID={setID}
-                />
-                <div className="col-3 documentItem">
-                  <button
-                    className="addDocument"
-                    onClick={() => {
-                      setshowAdd(true);
-                      setUpdates(set.documents);
-                      setID(set.id);
-                    }}
-                  >
-                    <div className="placeholder">
-                      <img src={add} alt="Add" />
-                      <h5>Add a Document</h5>
-                    </div>
-                  </button>
-                </div>
+          <div className="col-12 nopadding documentContainer">
+            <div className="row documentWrapper">
+              <Documents
+                documents={set.documents}
+                setUpdates={setUpdates}
+                id={set.id}
+                setID={setID}
+              />
+              <div className="col-xl-3 col-lg-4 col-md-6 col-sm-12 documentItem">
+                <button
+                  className="addDocument"
+                  onClick={() => {
+                    setshowAdd(true);
+                    setUpdates(set.documents);
+                    setID(set.id);
+                  }}
+                >
+                  <div className="placeholder">
+                    <img src={add} alt="Add" />
+                    <h5>Add a Document</h5>
+                  </div>
+                </button>
               </div>
             </div>
+          </div>
         </div>
       );
     });

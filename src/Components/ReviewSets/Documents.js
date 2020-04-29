@@ -35,13 +35,16 @@ const mapDocuments = ({ documents, setUpdates, id, setID }) => {
       />
       {documents.map((doc, index) => {
         return (
-          <div className="col-3 documentItem" key={doc.id}>
+          <div
+            className="col-xl-3 col-lg-4 col-md-6 col-sm-12 documentItem"
+            key={doc.id}
+          >
             <div className="regularDocument">
               <div className="row">
-                <div className="col-md-9">
+                <div className="col-9">
                   <b>{doc.title}</b>
                 </div>
-                <div className="col-md-3 nopadding documentButtons">
+                <div className="col-3 nopadding documentButtons">
                   <button
                     style={doc.reviewed ? { opacity: "1" } : {}}
                     onClick={() => updateStatus(doc, index)}
