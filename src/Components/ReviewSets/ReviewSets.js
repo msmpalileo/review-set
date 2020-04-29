@@ -2,75 +2,48 @@ import React, { useState, useEffect } from "react";
 import "./ReviewSets.scss";
 import history from "../../Resources/Icons/history.png";
 import trash from "../../Resources/Icons/delete.png";
-import complete from "../../Resources/Icons/complete.png";
 
 import add from "../../Resources/Icons/add.png";
-import { sortSets, getStringDate, expandSet, adjustHeight } from "../utils";
+import {
+  sortSets,
+  getStringDate,
+  expandSet,
+  adjustHeight,
+  percentReviewed,
+} from "../utils";
+import DeleteItem from "../_Modals/DeleteItem";
 import AddDocument from "../_Modals/AddDocument";
+import Documents from "./Documents";
 
 import "react-perfect-scrollbar/dist/css/styles.css";
 import PerfectScrollbar from "react-perfect-scrollbar";
 
-const ReviewSets = ({ records }) => {
-  const [currentRecords, setCurrentRecords] = useState([...records]);
+const ReviewSets = ({ records, setRecords }) => {
   const [showAdd, setshowAdd] = useState(false);
-  const [documents, setDocuments] = useState([]);
+  const [showDelete, setShowDelete] = useState(false);
+  const [updatedDocuments, setUpdates] = useState();
   const [reviewID, setID] = useState();
+  const [deleteParams, setDeleteParams] = useState({});
 
   useEffect(() => {
-    let newRecords = records.map((item) => {
-      if (item.id === reviewID) {
-        item.documents = [...documents];
-      }
-      return item;
-    });
-    setCurrentRecords(newRecords);
-    if (reviewID) {
-      adjustHeight(reviewID);
+    if (updatedDocuments) {
+      let arr = [...records];
+      arr.forEach((item) => {
+        if (item.id === reviewID) {
+          item.documents = updatedDocuments;
+        }
+      });
+      setRecords(arr);
     }
-  }, [documents, records]);
-
-  const mapDocuments = (arr) => {
-    return arr.map((doc) => {
-      return (
-        <div className="col-3 documentWrapper" key={doc.id}>
-          <div className="documentItem">
-            <div className="row">
-              <div className="col-md-9">
-                <b>{doc.title}</b>
-              </div>
-              <div className="col-md-3 nopadding documentButtons">
-                <button style={doc.reviewed ? { opacity: "1" } : {}}>
-                  <img src={complete} alt="Complete" />
-                </button>
-                <button>
-                  <img src={trash} alt="Remove" />
-                </button>
-              </div>
-              <div className="col-12">
-                <p>{doc.description}</p>
-              </div>
-            </div>
-            <div className="row">
-              <div className="documentPlaceholder"></div>
-              <div
-                className="documentPreview"
-                style={{ backgroundImage: `url(${doc.doc})` }}
-              ></div>
-            </div>
-          </div>
-        </div>
-      );
-    });
-  };
+  }, [updatedDocuments]);
 
   const mapReviewSets = (arr) => {
-    const sortedSets = sortSets(arr);
-    return sortedSets.map((set) => {
+    let sortedSets = sortSets(arr);
+    return sortedSets.map((set, index) => {
       return (
         <div className="row reviewItem" id={`item-${set.id}`} key={set.id}>
           <div className="col-md-2 nopadding">
-            <button onClick={() => expandSet(set.id)}>
+            <button className="expandButton" onClick={() => expandSet(set.id, set.documents.length)}>
               <div id={`expand1-${set.id}`}></div>
               <div id="expand2">&nbsp;</div>
             </button>
@@ -81,18 +54,31 @@ const ReviewSets = ({ records }) => {
           </div>
           <div className="col-md-3 nopadding text-right">
             <img src={history} alt="History" />
-            <span>% Reviewed</span>&emsp;
-            <img src={trash} alt="Delete" />
+            <span>&ensp;{percentReviewed(set.documents)}% Reviewed</span>&emsp;
+            <button
+              className="removeButton"
+              onClick={() => {
+                setShowDelete(true);
+                setDeleteParams({ index: index, type: "Review Set" });
+              }}
+            >
+              <img src={trash} alt="Delete" />
+            </button>
           </div>
           <div className="col-12 nopadding">
             <div className="row documentsContainer">
-              {mapDocuments(set.documents)}
+              <Documents
+                documents={set.documents}
+                setUpdates={setUpdates}
+                id={set.id}
+                setID={setID}
+              />
               <div className="col-3 documentWrapper">
                 <button
                   className="addDocument"
                   onClick={() => {
                     setshowAdd(true);
-                    setDocuments([...set.documents]);
+                    setUpdates(set.documents);
                     setID(set.id);
                   }}
                 >
@@ -112,12 +98,19 @@ const ReviewSets = ({ records }) => {
   return (
     <div className="row justify-content-center">
       <div className="col-md-10 reviewSetContainer nopadding">
-        <PerfectScrollbar>{mapReviewSets(currentRecords)}</PerfectScrollbar>
+        <PerfectScrollbar>{mapReviewSets(records)}</PerfectScrollbar>
         <AddDocument
           show={showAdd}
           onHide={() => setshowAdd(false)}
-          documents={documents}
-          setDocuments={setDocuments}
+          documents={updatedDocuments}
+          setUpdates={setUpdates}
+        />
+        <DeleteItem
+          show={showDelete}
+          onHide={() => setShowDelete(false)}
+          records={records}
+          setRecords={setRecords}
+          deleteParams={deleteParams}
         />
       </div>
     </div>

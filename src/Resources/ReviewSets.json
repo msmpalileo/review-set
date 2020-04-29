@@ -3,7 +3,15 @@
     "id": 1,
     "date": "2020-04-13",
     "title": "House Leasing Contracts for Will Smith",
-    "documents": []
+    "documents": [
+      {
+        "id": 1,
+        "title": "Suspension of Classes due to Covid-19",
+        "description": "Official Memo from the Principal to suspend all classes starting March 27, 2020 until further notice.",
+        "doc": [],
+        "reviewed": true
+      }
+    ]
   },
   {
     "id": 2,
@@ -26,21 +34,21 @@
       },
       {
         "id": 3,
-        "title": "New Projects regarding the New Building",
+        "title": "3",
         "description": "Documents from Contractors.",
         "doc": [],
         "reviewed": true
       },
       {
         "id": 4,
-        "title": "New Projects regarding the New Building",
+        "title": "4",
         "description": "Documents from Contractors.",
         "doc": [],
         "reviewed": false
       },
       {
         "id": 5,
-        "title": "New Projects regarding the New Building",
+        "title": "5",
         "description": "Documents from Contractors.",
         "doc": [],
         "reviewed": false

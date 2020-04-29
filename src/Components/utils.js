@@ -58,9 +58,12 @@ export const sortSets = (array) => {
   });
 };
 
-export const expandSet = (id) => {
+export const expandSet = (id, length) => {
   const item = document.getElementById("item-" + id);
   const plusSymbol = document.getElementById("expand1-" + id);
+
+  const expandMultiplier = Math.floor((length + 1) / 4);
+  const expandHeight = 600 * (expandMultiplier + 1);
 
   if (item.classList.contains("expanded")) {
     item.classList.remove("expanded");
@@ -68,14 +71,21 @@ export const expandSet = (id) => {
     plusSymbol.style.transform = "rotate(0)";
   } else {
     item.classList.add("expanded");
-    item.style.height = `${item.scrollHeight + 5}px`;
+    item.style.height = `${expandHeight + 30}px`;
     plusSymbol.style.transform = "rotate(90deg)";
   }
 };
 
-export const adjustHeight = (id) => {
+export const adjustHeight = (id, length) => {
   const item = document.getElementById("item-" + id);
-  item.style.height = `${item.scrollHeight + 5}px`;
+  const plusSymbol = document.getElementById("expand1-" + id);
+
+  const expandMultiplier = Math.floor((length + 1) / 4);
+  const expandHeight = 600 * (expandMultiplier + 1);
+
+  item.classList.add("expanded");
+  item.style.height = `${expandHeight + 30}px`;
+  plusSymbol.style.transform = "rotate(90deg)";
 };
 
 export const handleUpload = (e, setDocument, setDocumentName) => {
@@ -92,4 +102,20 @@ export const handleUpload = (e, setDocument, setDocumentName) => {
       setDocumentName(file.name);
     };
   });
+};
+
+export const percentReviewed = (arr) => {
+  let reviewed = 0;
+
+  if (!arr.length) {
+    return 0;
+  }
+
+  arr.forEach((item) => {
+    if (item.reviewed) {
+      reviewed++;
+    }
+  });
+
+  return Math.floor((reviewed / arr.length) * 100);
 };

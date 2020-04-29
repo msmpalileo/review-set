@@ -11,7 +11,7 @@ const App = () => {
   return (
     <div className="container-fluid appContainer">
       <TitleBar setRecords={setRecords} records={records} />
-      <ReviewSets records={records} />
+      <ReviewSets setRecords={setRecords} records={records} />
     </div>
   );
 };

@@ -6,14 +6,14 @@ import doc from "../../Resources/Icons/drafts.png";
 
 import { generateID, handleUpload } from "../utils";
 
-const AddDocument = ({ setDocuments, documents, onHide, show }) => {
+const AddDocument = ({ setUpdates, documents, onHide, show }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [documentFile, setDocumentFile] = useState([]);
   const [documentName, setDocumentName] = useState("");
 
   const addDocument = () => {
-    setDocuments([
+    setUpdates([
       ...documents,
       {
         id: generateID(),
@@ -60,7 +60,10 @@ const AddDocument = ({ setDocuments, documents, onHide, show }) => {
         >
           {documentFile.length ? (
             <>
-              <div style={{backgroundImage: `url(${documentFile})`}} className="documentPreview" />
+              <div
+                style={{ backgroundImage: `url(${documentFile})` }}
+                className="documentPreview"
+              />
               <p>
                 {documentName}
                 <br />
@@ -82,7 +85,11 @@ const AddDocument = ({ setDocuments, documents, onHide, show }) => {
         />
         <div className="buttons">
           <button onClick={onHide}>Cancel</button>
-          <button onClick={() => addDocument()}>
+          <button
+            onClick={() => {
+              addDocument();
+            }}
+          >
             Add Document
           </button>
         </div>
