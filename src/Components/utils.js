@@ -64,7 +64,7 @@ export const expandSet = (id, length) => {
 
   const currentHeight = item.offsetHeight;
   const expandMultiplier = Math.floor((length + 1) / 4);
-  const expandHeight = 600 * (expandMultiplier + 1);
+  const expandHeight = 536 * (expandMultiplier + 1);
 
   if (item.classList.contains("expanded")) {
     item.style.height = `${currentHeight}px`;
@@ -81,7 +81,7 @@ export const expandSet = (id, length) => {
     }, 100);
   } else {
     item.classList.add("expanded");
-    item.style.height = `${expandHeight + 30}px`;
+    item.style.height = `${expandHeight}px`;
     plusSymbol.style.transform = "rotate(90deg)";
 
     setTimeout(() => {
