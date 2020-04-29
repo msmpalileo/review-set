@@ -15,6 +15,22 @@
     max-height: 600;
     overflow: hidden;
 
+    @media (max-width: 991px) {
+      height: 70px;
+    }
+
+    @media (max-width: 767px) {
+      height: 100px;
+    }
+
+    b {
+      p {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
     span {
       font-size: 14px;
       color: rgb(167, 167, 167);
@@ -68,8 +84,6 @@
         transition: all 0.3s ease-in-out;
       }
     }
-
-
   }
 
   .expanded {

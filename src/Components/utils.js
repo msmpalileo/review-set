@@ -70,8 +70,10 @@ export const expandSet = (id, length) => {
     item.style.height = `${currentHeight}px`;
     item.classList.remove("expanded");
     setTimeout(() => {
-      if (window.innerWidth < 992) {
-        item.style.height = "75px";
+      if (window.innerWidth < 767) {
+        item.style.height = "100px";
+      } else if (window.innerWidth < 992) {
+        item.style.height = "70px";
       } else {
         item.style.height = "48px";
       }

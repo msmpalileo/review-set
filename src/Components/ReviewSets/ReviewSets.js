@@ -18,6 +18,30 @@ const ReviewSets = ({ records, setRecords }) => {
   const [updatedDocuments, setUpdates] = useState();
   const [reviewID, setID] = useState();
   const [deleteParams, setDeleteParams] = useState({});
+  const [windowWidth, setWidth] = useState(window.innerWidth);
+
+  const debounce = (fn, ms) => {
+    let timer;
+    return (_) => {
+      clearTimeout(timer);
+      timer = setTimeout((_) => {
+        timer = null;
+        fn.apply(this, arguments);
+      }, ms);
+    };
+  };
+
+  useEffect(() => {
+    const debouncedHandleResize = debounce(function handleResize() {
+      setWidth(window.innerWidth);
+    }, 1);
+
+    window.addEventListener("resize", debouncedHandleResize);
+
+    return (_) => {
+      window.removeEventListener("resize", debouncedHandleResize);
+    };
+  });
 
   useEffect(() => {
     if (updatedDocuments) {
@@ -36,32 +60,68 @@ const ReviewSets = ({ records, setRecords }) => {
     return sortedSets.map((set, index) => {
       return (
         <div className="row reviewItem" id={`item-${set.id}`} key={set.id}>
-          <div className="col-md-12 col-lg-2 nopadding">
-            <button
-              className="expandButton"
-              onClick={() => expandSet(set.id, set.documents.length)}
-            >
-              <div id={`expand1-${set.id}`}></div>
-              <div id="expand2">&nbsp;</div>
-            </button>
-            <span>&emsp;{getStringDate(set.date)}</span>
-          </div>
-          <div className="col-md-8 col-lg-7 nopadding">
-            <b>{set.title}</b>
-          </div>
-          <div className="col-md-4 col-lg-3 nopadding text-right">
-            <img src={history} alt="History" />
-            <span>&ensp;{percentReviewed(set.documents)}% Reviewed</span>&emsp;
-            <button
-              className="removeButton"
-              onClick={() => {
-                setShowDelete(true);
-                setDeleteParams({ index: index, type: "Review Set" });
-              }}
-            >
-              <img src={trash} alt="Delete" />
-            </button>
-          </div>
+          {windowWidth >= 768 ? (
+            <>
+              <div className="col-md-12 col-lg-2 nopadding">
+                <button
+                  className="expandButton"
+                  onClick={() => expandSet(set.id, set.documents.length)}
+                >
+                  <div id={`expand1-${set.id}`}></div>
+                  <div id="expand2">&nbsp;</div>
+                </button>
+                <span>&emsp;{getStringDate(set.date)}</span>
+              </div>
+              <div className="col-md-8 col-lg-7 nopadding">
+                <b><p>{set.title}</p></b>
+              </div>
+              <div className="col-md-4 col-lg-3 nopadding text-right">
+                <img src={history} alt="History" />
+                <span>&ensp;{percentReviewed(set.documents)}% Reviewed</span>
+                &emsp;
+                <button
+                  className="removeButton"
+                  onClick={() => {
+                    setShowDelete(true);
+                    setDeleteParams({ index: index, type: "Review Set" });
+                  }}
+                >
+                  <img src={trash} alt="Delete" />
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="col-8 nopadding">
+                <button
+                  className="expandButton"
+                  onClick={() => expandSet(set.id, set.documents.length)}
+                >
+                  <div id={`expand1-${set.id}`}></div>
+                  <div id="expand2">&nbsp;</div>
+                </button>
+                <span>&emsp;{getStringDate(set.date)}</span>
+                <br />
+                <img src={history} alt="History" />
+                <span>&ensp;{percentReviewed(set.documents)}% Reviewed</span>
+              </div>
+              <div className="col-4 nopadding text-right">
+                &emsp;
+                <button
+                  className="removeButton"
+                  onClick={() => {
+                    setShowDelete(true);
+                    setDeleteParams({ index: index, type: "Review Set" });
+                  }}
+                >
+                  <img src={trash} alt="Delete" />
+                </button>
+              </div>
+              <div className="col-12 nopadding">
+                <b><p>{set.title}</p></b>
+              </div>
+            </>
+          )}
           <div className="col-12 nopadding documentContainer">
             <div className="row documentWrapper">
               <Documents
